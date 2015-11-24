@@ -17,14 +17,16 @@
   "description": "MineSweeper",
   "main": "bundle.js",
   "dependencies": {
+    "babel-core": "^6.2.1",
+    "babel-runtime": "^6.2.0",
     "babelify": "~6.1.2",
-    "gulp": "~3.9.0",
     "browserify": "~10.2.4",
-    "react": "~0.13.3",
+    "gulp": "~3.9.0",
+    "gulp-sass": "~2.0.1",
     "gulp-webserver": "~0.9.1",
+    "react": "~0.13.3",
     "vinyl-source-stream": "~1.1.0",
-    "watchify": "~3.2.2",
-    "gulp-sass": "~2.0.1"
+    "watchify": "~3.2.2"
   },
   "author": "kazshiba"
 }

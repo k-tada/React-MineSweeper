@@ -9,7 +9,7 @@ export default class Table extends React.Component {
         };
     }
     componentWillReceiveProps(nextProps) {
-        if(this.props.openNum > nextProps.openNum || this.props.colNum !== nextProps.colNum){
+        if(this.props.openNum > nextProps.openNum || this.props.size[1] !== nextProps.size[1]){
             this.setState({
                 rows : this.createTable(nextProps)
             });
@@ -18,9 +18,9 @@ export default class Table extends React.Component {
     }
     createTable(props) {
         var mineTable = [];
-        for(var row = 0; row < props.rowNum; row++){
+        for(var row = 0; row < props.size[0]; row++){
             mineTable.push([]);
-            for(var col = 0; col < props.colNum; col++){
+            for(var col = 0; col < props.size[1]; col++){
                 mineTable[row].push({
                     x : col,
                     y : row,
@@ -32,7 +32,7 @@ export default class Table extends React.Component {
             }
         }
         for(var i = 0; i < props.mineNum; i++){
-            var cell = mineTable[Math.floor(Math.random()*props.rowNum)][Math.floor(Math.random()*props.colNum)];
+            var cell = mineTable[Math.floor(Math.random()*props.size[0])][Math.floor(Math.random()*props.size[1])];
             if(cell.hasMine){
                 i--;
             } else {
