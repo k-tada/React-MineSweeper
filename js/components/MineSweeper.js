@@ -1,6 +1,7 @@
 import React from 'react';
 import Table from './Table.js';
 import Level from './Level.js';
+import StatusBar from './StatusBar.js';
 
 export default class MineSweeper extends React.Component {
   constructor(props) {
@@ -72,11 +73,10 @@ export default class MineSweeper extends React.Component {
       <div>
         <Level levels={this.levels} level={this.state.level} setLevel={this.setLevel.bind(this)} />
         <div className={"MineSweeper " + this.state.level}>
-          <span className="MineSweeper__flagNum"> {this.state.mineNum - this.state.flagNum}</span>
-          <span className="MineSweeper__face" onClick={this.reset.bind(this)}>
-            <span className={"button " + this.state.status}></span>
-          </span>
-          <span className="MineSweeper__time"> {this.state.time}</span>
+          <StatusBar flagNum={this.state.mineNum - this.state.flagNum}
+                     reset={this.reset.bind(this)}
+                     status={this.state.status}
+                     time={this.state.time} />
           <Table openNum={this.state.openNum}
                  mineNum={this.state.mineNum}
                  size={this.state.size}
