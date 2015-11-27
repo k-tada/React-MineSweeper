@@ -13,7 +13,7 @@ var _componentsMineSweeperJs2 = _interopRequireDefault(_componentsMineSweeperJs)
 
 _react2['default'].render(_react2['default'].createElement(_componentsMineSweeperJs2['default'], null), document.getElementById('MineSweeper'));
 
-},{"./components/MineSweeper.js":6,"babel-runtime/helpers/interop-require-default":22,"react":223}],2:[function(require,module,exports){
+},{"./components/MineSweeper.js":4,"babel-runtime/helpers/interop-require-default":22,"react":223}],2:[function(require,module,exports){
 "use strict";
 
 var _get = require("babel-runtime/helpers/get")["default"];
@@ -148,101 +148,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var Face = (function (_React$Component) {
-  _inherits(Face, _React$Component);
-
-  function Face(props) {
-    _classCallCheck(this, Face);
-
-    _get(Object.getPrototypeOf(Face.prototype), "constructor", this).call(this, props);
-  }
-
-  _createClass(Face, [{
-    key: "render",
-    value: function render() {
-      return _react2["default"].createElement(
-        "span",
-        { className: "MineSweeper__face", onClick: this.props.reset.bind(this) },
-        _react2["default"].createElement("span", { className: "button " + this.props.status })
-      );
-    }
-  }]);
-
-  return Face;
-})(_react2["default"].Component);
-
-exports["default"] = Face;
-module.exports = exports["default"];
-
-},{"babel-runtime/helpers/class-call-check":18,"babel-runtime/helpers/create-class":19,"babel-runtime/helpers/get":20,"babel-runtime/helpers/inherits":21,"babel-runtime/helpers/interop-require-default":22,"react":223}],4:[function(require,module,exports){
-"use strict";
-
-var _get = require("babel-runtime/helpers/get")["default"];
-
-var _inherits = require("babel-runtime/helpers/inherits")["default"];
-
-var _createClass = require("babel-runtime/helpers/create-class")["default"];
-
-var _classCallCheck = require("babel-runtime/helpers/class-call-check")["default"];
-
-var _interopRequireDefault = require("babel-runtime/helpers/interop-require-default")["default"];
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var Flag = (function (_React$Component) {
-  _inherits(Flag, _React$Component);
-
-  function Flag(props) {
-    _classCallCheck(this, Flag);
-
-    _get(Object.getPrototypeOf(Flag.prototype), "constructor", this).call(this, props);
-  }
-
-  _createClass(Flag, [{
-    key: "render",
-    value: function render() {
-      return _react2["default"].createElement(
-        "span",
-        { className: "MineSweeper__flagNum" },
-        " ",
-        this.props.num
-      );
-    }
-  }]);
-
-  return Flag;
-})(_react2["default"].Component);
-
-exports["default"] = Flag;
-module.exports = exports["default"];
-
-},{"babel-runtime/helpers/class-call-check":18,"babel-runtime/helpers/create-class":19,"babel-runtime/helpers/get":20,"babel-runtime/helpers/inherits":21,"babel-runtime/helpers/interop-require-default":22,"react":223}],5:[function(require,module,exports){
-"use strict";
-
-var _get = require("babel-runtime/helpers/get")["default"];
-
-var _inherits = require("babel-runtime/helpers/inherits")["default"];
-
-var _createClass = require("babel-runtime/helpers/create-class")["default"];
-
-var _classCallCheck = require("babel-runtime/helpers/class-call-check")["default"];
-
-var _interopRequireDefault = require("babel-runtime/helpers/interop-require-default")["default"];
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
 var Level = (function (_React$Component) {
   _inherits(Level, _React$Component);
 
@@ -279,7 +184,7 @@ var Level = (function (_React$Component) {
 exports["default"] = Level;
 module.exports = exports["default"];
 
-},{"babel-runtime/helpers/class-call-check":18,"babel-runtime/helpers/create-class":19,"babel-runtime/helpers/get":20,"babel-runtime/helpers/inherits":21,"babel-runtime/helpers/interop-require-default":22,"react":223}],6:[function(require,module,exports){
+},{"babel-runtime/helpers/class-call-check":18,"babel-runtime/helpers/create-class":19,"babel-runtime/helpers/get":20,"babel-runtime/helpers/inherits":21,"babel-runtime/helpers/interop-require-default":22,"react":223}],4:[function(require,module,exports){
 'use strict';
 
 var _get = require('babel-runtime/helpers/get')['default'];
@@ -425,7 +330,7 @@ var MineSweeper = (function (_React$Component) {
 exports['default'] = MineSweeper;
 module.exports = exports['default'];
 
-},{"./Level.js":5,"./StatusBar.js":8,"./Table.js":9,"babel-runtime/core-js/object/assign":11,"babel-runtime/helpers/class-call-check":18,"babel-runtime/helpers/create-class":19,"babel-runtime/helpers/get":20,"babel-runtime/helpers/inherits":21,"babel-runtime/helpers/interop-require-default":22,"react":223}],7:[function(require,module,exports){
+},{"./Level.js":3,"./StatusBar.js":6,"./Table.js":7,"babel-runtime/core-js/object/assign":11,"babel-runtime/helpers/class-call-check":18,"babel-runtime/helpers/create-class":19,"babel-runtime/helpers/get":20,"babel-runtime/helpers/inherits":21,"babel-runtime/helpers/interop-require-default":22,"react":223}],5:[function(require,module,exports){
 'use strict';
 
 var _get = require('babel-runtime/helpers/get')['default'];
@@ -491,7 +396,7 @@ var Row = (function (_React$Component) {
 exports['default'] = Row;
 module.exports = exports['default'];
 
-},{"./Cell.js":2,"babel-runtime/helpers/class-call-check":18,"babel-runtime/helpers/create-class":19,"babel-runtime/helpers/get":20,"babel-runtime/helpers/inherits":21,"babel-runtime/helpers/interop-require-default":22,"react":223}],8:[function(require,module,exports){
+},{"./Cell.js":2,"babel-runtime/helpers/class-call-check":18,"babel-runtime/helpers/create-class":19,"babel-runtime/helpers/get":20,"babel-runtime/helpers/inherits":21,"babel-runtime/helpers/interop-require-default":22,"react":223}],6:[function(require,module,exports){
 'use strict';
 
 var _get = require('babel-runtime/helpers/get')['default'];
@@ -512,17 +417,17 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _FlagJs = require('./Flag.js');
+var _status_barFlagJs = require('./status_bar/Flag.js');
 
-var _FlagJs2 = _interopRequireDefault(_FlagJs);
+var _status_barFlagJs2 = _interopRequireDefault(_status_barFlagJs);
 
-var _FaceJs = require('./Face.js');
+var _status_barFaceJs = require('./status_bar/Face.js');
 
-var _FaceJs2 = _interopRequireDefault(_FaceJs);
+var _status_barFaceJs2 = _interopRequireDefault(_status_barFaceJs);
 
-var _TimeJs = require('./Time.js');
+var _status_barTimeJs = require('./status_bar/Time.js');
 
-var _TimeJs2 = _interopRequireDefault(_TimeJs);
+var _status_barTimeJs2 = _interopRequireDefault(_status_barTimeJs);
 
 var StatusBar = (function (_React$Component) {
   _inherits(StatusBar, _React$Component);
@@ -539,9 +444,9 @@ var StatusBar = (function (_React$Component) {
       return _react2['default'].createElement(
         'div',
         { 'class': 'MineSweeper__StatusBar' },
-        _react2['default'].createElement(_FlagJs2['default'], { num: this.props.flagNum }),
-        _react2['default'].createElement(_FaceJs2['default'], { reset: this.props.reset.bind(this), status: this.props.status }),
-        _react2['default'].createElement(_TimeJs2['default'], { time: this.props.time })
+        _react2['default'].createElement(_status_barFlagJs2['default'], { num: this.props.flagNum }),
+        _react2['default'].createElement(_status_barFaceJs2['default'], { reset: this.props.reset.bind(this), status: this.props.status }),
+        _react2['default'].createElement(_status_barTimeJs2['default'], { time: this.props.time })
       );
     }
   }]);
@@ -552,7 +457,7 @@ var StatusBar = (function (_React$Component) {
 exports['default'] = StatusBar;
 module.exports = exports['default'];
 
-},{"./Face.js":3,"./Flag.js":4,"./Time.js":10,"babel-runtime/helpers/class-call-check":18,"babel-runtime/helpers/create-class":19,"babel-runtime/helpers/get":20,"babel-runtime/helpers/inherits":21,"babel-runtime/helpers/interop-require-default":22,"react":223}],9:[function(require,module,exports){
+},{"./status_bar/Face.js":8,"./status_bar/Flag.js":9,"./status_bar/Time.js":10,"babel-runtime/helpers/class-call-check":18,"babel-runtime/helpers/create-class":19,"babel-runtime/helpers/get":20,"babel-runtime/helpers/inherits":21,"babel-runtime/helpers/interop-require-default":22,"react":223}],7:[function(require,module,exports){
 'use strict';
 
 var _get = require('babel-runtime/helpers/get')['default'];
@@ -633,6 +538,7 @@ var Table = (function (_React$Component) {
       if (!_rows[cell.y][cell.x].isOpened) {
         this.props.addOpenNum();
       }
+
       _rows[cell.y][cell.x].isOpened = true;
       _rows[cell.y][cell.x].count = cell.hasMine ? "b" : num;
       this.setState({ rows: _rows });
@@ -659,35 +565,60 @@ var Table = (function (_React$Component) {
   }, {
     key: 'countMines',
     value: function countMines(cell) {
+      var _this = this;
+
       var aroundMinesNum = 0;
-      for (var row = -1; row <= 1; row++) {
-        for (var col = -1; col <= 1; col++) {
-          if (cell.y - 0 + row >= 0 && cell.x - 0 + col >= 0 && cell.y - 0 + row < this.state.rows.length && cell.x - 0 + col < this.state.rows[0].length && this.state.rows[cell.y - 0 + row][cell.x - 0 + col].hasMine && !(row === 0 && col === 0)) {
-            aroundMinesNum++;
-          }
+      this.doProcForArrount(cell, function (r, c) {
+        // 爆弾
+        if (_this.state.rows[r][c].hasMine) {
+          aroundMinesNum++;
         }
-      }
+      });
       return aroundMinesNum;
     }
+
+    // 自セルが空の場合は周囲のセルも開く
   }, {
     key: 'openAround',
     value: function openAround(cell) {
+      var _this2 = this;
+
       var _rows = this.state.rows;
+      this.doProcForArrount(cell, function (r, c) {
+        if (!_this2.state.rows[r][c].hasMine && // 爆弾以外
+        !_this2.state.rows[r][c].isOpened // 開いてないセル
+        ) {
+            _this2.open(_rows[r][c]);
+          }
+      });
+    }
+  }, {
+    key: 'is_in',
+    value: function is_in(targ, min, max) {
+      return min <= targ && targ <= max;
+    }
+  }, {
+    key: 'doProcForArrount',
+    value: function doProcForArrount(cell, proc) {
       for (var row = -1; row <= 1; row++) {
         for (var col = -1; col <= 1; col++) {
-          if (cell.y - 0 + row >= 0 && cell.x - 0 + col >= 0 && cell.y - 0 + row < this.state.rows.length && cell.x - 0 + col < this.state.rows[0].length && !this.state.rows[cell.y - 0 + row][cell.x - 0 + col].hasMine && !this.state.rows[cell.y - 0 + row][cell.x - 0 + col].isOpened) {
-            this.open(_rows[cell.y - 0 + row][cell.x - 0 + col]);
-          }
+          var targ = { row: cell.y + row, col: cell.x + col };
+          if (!(row === 0 && col === 0) // 自セル以外
+           && this.is_in(targ.row, 0, this.props.size[0] - 1) // 範囲行内
+           && this.is_in(targ.col, 0, this.props.size[1] - 1) // 範囲列内
+          ) {
+              proc(targ.row, targ.col);
+            }
         }
       }
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this = this;
+      var _this3 = this;
 
       var Rows = this.state.rows.map(function (row, index) {
-        return _react2['default'].createElement(_RowJs2['default'], { cells: row, open: _this.open.bind(_this), mark: _this.mark.bind(_this) });
+        return _react2['default'].createElement(_RowJs2['default'], { cells: row, open: _this3.open.bind(_this3), mark: _this3.mark.bind(_this3) });
       });
       return _react2['default'].createElement(
         'table',
@@ -707,7 +638,102 @@ var Table = (function (_React$Component) {
 exports['default'] = Table;
 module.exports = exports['default'];
 
-},{"./Row.js":7,"babel-runtime/helpers/class-call-check":18,"babel-runtime/helpers/create-class":19,"babel-runtime/helpers/get":20,"babel-runtime/helpers/inherits":21,"babel-runtime/helpers/interop-require-default":22,"react":223}],10:[function(require,module,exports){
+},{"./Row.js":5,"babel-runtime/helpers/class-call-check":18,"babel-runtime/helpers/create-class":19,"babel-runtime/helpers/get":20,"babel-runtime/helpers/inherits":21,"babel-runtime/helpers/interop-require-default":22,"react":223}],8:[function(require,module,exports){
+"use strict";
+
+var _get = require("babel-runtime/helpers/get")["default"];
+
+var _inherits = require("babel-runtime/helpers/inherits")["default"];
+
+var _createClass = require("babel-runtime/helpers/create-class")["default"];
+
+var _classCallCheck = require("babel-runtime/helpers/class-call-check")["default"];
+
+var _interopRequireDefault = require("babel-runtime/helpers/interop-require-default")["default"];
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var Face = (function (_React$Component) {
+  _inherits(Face, _React$Component);
+
+  function Face(props) {
+    _classCallCheck(this, Face);
+
+    _get(Object.getPrototypeOf(Face.prototype), "constructor", this).call(this, props);
+  }
+
+  _createClass(Face, [{
+    key: "render",
+    value: function render() {
+      return _react2["default"].createElement(
+        "span",
+        { className: "MineSweeper__face", onClick: this.props.reset.bind(this) },
+        _react2["default"].createElement("span", { className: "button " + this.props.status })
+      );
+    }
+  }]);
+
+  return Face;
+})(_react2["default"].Component);
+
+exports["default"] = Face;
+module.exports = exports["default"];
+
+},{"babel-runtime/helpers/class-call-check":18,"babel-runtime/helpers/create-class":19,"babel-runtime/helpers/get":20,"babel-runtime/helpers/inherits":21,"babel-runtime/helpers/interop-require-default":22,"react":223}],9:[function(require,module,exports){
+"use strict";
+
+var _get = require("babel-runtime/helpers/get")["default"];
+
+var _inherits = require("babel-runtime/helpers/inherits")["default"];
+
+var _createClass = require("babel-runtime/helpers/create-class")["default"];
+
+var _classCallCheck = require("babel-runtime/helpers/class-call-check")["default"];
+
+var _interopRequireDefault = require("babel-runtime/helpers/interop-require-default")["default"];
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var Flag = (function (_React$Component) {
+  _inherits(Flag, _React$Component);
+
+  function Flag(props) {
+    _classCallCheck(this, Flag);
+
+    _get(Object.getPrototypeOf(Flag.prototype), "constructor", this).call(this, props);
+  }
+
+  _createClass(Flag, [{
+    key: "render",
+    value: function render() {
+      return _react2["default"].createElement(
+        "span",
+        { className: "MineSweeper__flagNum" },
+        " ",
+        this.props.num
+      );
+    }
+  }]);
+
+  return Flag;
+})(_react2["default"].Component);
+
+exports["default"] = Flag;
+module.exports = exports["default"];
+
+},{"babel-runtime/helpers/class-call-check":18,"babel-runtime/helpers/create-class":19,"babel-runtime/helpers/get":20,"babel-runtime/helpers/inherits":21,"babel-runtime/helpers/interop-require-default":22,"react":223}],10:[function(require,module,exports){
 "use strict";
 
 var _get = require("babel-runtime/helpers/get")["default"];

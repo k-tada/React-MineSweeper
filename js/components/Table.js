@@ -2,20 +2,22 @@ import React from 'react';
 import Row from './Row.js';
 
 export default class Table extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
       rows : this.createTable(props)
     };
   }
+
   componentWillReceiveProps(nextProps) {
     if(this.props.openNum > nextProps.openNum || this.props.size[1] !== nextProps.size[1]){
       this.setState({
         rows : this.createTable(nextProps)
       });
     }
-
   }
+
   createTable(props) {
     var mineTable = [];
     for(var row = 0; row < props.size[0]; row++){
@@ -41,12 +43,14 @@ export default class Table extends React.Component {
     }
     return mineTable;
   }
+
   open(cell) {
     var num = this.countMines(cell);
     var _rows = this.state.rows;
-    if(!_rows[cell.y][cell.x].isOpened){
+    if( ! _rows[cell.y][cell.x].isOpened){
       this.props.addOpenNum();
     }
+
     _rows[cell.y][cell.x].isOpened = true;
     _rows[cell.y][cell.x].count = cell.hasMine ? "b" : num;
     this.setState({rows : _rows});
@@ -61,6 +65,7 @@ export default class Table extends React.Component {
       this.props.gameOver();
     }
   }
+
   mark(cell) {
     var _rows = this.state.rows;
     var _cell = _rows[cell.y][cell.x];
@@ -68,39 +73,62 @@ export default class Table extends React.Component {
     this.setState({rows : _rows});
     this.props.checkFlagNum(_cell.hasFlag ? 1 : -1);
   }
+
   countMines(cell) {
     var aroundMinesNum = 0;
-    for(var row = -1; row <= 1; row++){
-      for(var col = -1; col <= 1; col++){
-        if(cell.y-0 + row >= 0 && cell.x-0 + col >= 0 && cell.y-0 + row < this.state.rows.length && cell.x-0 + col < this.state.rows[0].length && this.state.rows[cell.y-0 + row][cell.x-0 + col].hasMine && !(row === 0 && col === 0)){
-          aroundMinesNum ++;
-        }
+    this.doProcForArrount(cell, (r, c) => {
+      // 爆弾
+      if( this.state.rows[r][c].hasMine ){
+        aroundMinesNum ++;
       }
-    }
+    });
     return aroundMinesNum;
   }
+
+  // 自セルが空の場合は周囲のセルも開く
   openAround(cell){
     var _rows = this.state.rows;
+    this.doProcForArrount(cell, (r, c) => {
+      if(
+          ! this.state.rows[r][c].hasMine &&   // 爆弾以外
+          ! this.state.rows[r][c].isOpened     // 開いてないセル
+      ){
+        this.open(_rows[r][c]);
+      }
+    });
+  }
+
+  is_in(targ, min, max) {
+    return min <= targ && targ <= max;
+  }
+
+  doProcForArrount(cell, proc) {
     for(var row = -1; row <= 1; row++){
       for(var col = -1; col <= 1; col++){
-        if(cell.y-0 + row >= 0 && cell.x-0 + col >= 0 && cell.y-0 + row < this.state.rows.length && cell.x-0 + col < this.state.rows[0].length && !this.state.rows[cell.y-0 + row][cell.x-0 + col].hasMine && !this.state.rows[cell.y-0 + row][cell.x-0 + col].isOpened){
-          this.open(_rows[cell.y-0 + row][cell.x-0 + col]);
+        var targ = { row: cell.y + row, col: cell.x + col };
+        if(
+          ! (row === 0 && col === 0)                         // 自セル以外
+          && this.is_in(targ.row, 0, this.props.size[0] - 1) // 範囲行内
+          && this.is_in(targ.col, 0, this.props.size[1] - 1) // 範囲列内
+        ){
+          proc(targ.row, targ.col);
         }
       }
     }
   }
+
   render() {
     var Rows = this.state.rows.map((row, index) => {
       return(
-          <Row cells={row} open={this.open.bind(this)} mark={this.mark.bind(this)} />
-          );
+        <Row cells={row} open={this.open.bind(this)} mark={this.mark.bind(this)} />
+      );
     });
     return(
-        <table className="Table">
+      <table className="Table">
         <tbody>
-        {Rows}
+          {Rows}
         </tbody>
-        </table>
-        );
+      </table>
+    );
   }
 }

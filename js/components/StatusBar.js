@@ -1,7 +1,7 @@
 import React from 'react';
-import Flag from './Flag.js'
-import Face from './Face.js'
-import Time from './Time.js'
+import Flag from './status_bar/Flag.js'
+import Face from './status_bar/Face.js'
+import Time from './status_bar/Time.js'
 
 export default class StatusBar extends React.Component {
   constructor(props) {
