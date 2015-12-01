@@ -45,33 +45,34 @@ export default class Table extends React.Component {
   }
 
   open(cell) {
-    var num = this.countMines(cell);
-    var _rows = this.state.rows;
-    if( ! _rows[cell.y][cell.x].isOpened){
+    if( ! this.state.rows[cell.y][cell.x].isOpened){
       this.props.addOpenNum();
     }
 
-    _rows[cell.y][cell.x].isOpened = true;
-    _rows[cell.y][cell.x].count = cell.hasMine ? "b" : num;
-    this.setState({rows : _rows});
-    if(_rows[cell.y][cell.x].hasFlag){
-      _rows[cell.y][cell.x].hasFlag = false;
+    var num = this.countMines(cell);
+    this.state.rows[cell.y][cell.x].isOpened = true;
+    this.state.rows[cell.y][cell.x].count    = num;
+    this.state.rows[cell.y][cell.x].hasFlag  = false;
+
+    if(cell.hasMine){
+      this.state.rows[cell.y][cell.x].count = "b";
+      this.props.gameOver();
+    }
+    this.setState({rows : this.state.rows});
+
+    if(this.state.rows[cell.y][cell.x].hasFlag){
       this.props.checkFlagNum(-1);
     }
-    if(!cell.hasMine && num === 0){
+
+    if( ! cell.hasMine && num === 0){
       this.openAround(cell);
-    }
-    if(cell.hasMine){
-      this.props.gameOver();
     }
   }
 
   mark(cell) {
-    var _rows = this.state.rows;
-    var _cell = _rows[cell.y][cell.x];
-    _cell.hasFlag = !_cell.hasFlag;
-    this.setState({rows : _rows});
-    this.props.checkFlagNum(_cell.hasFlag ? 1 : -1);
+    this.state.rows[cell.y][cell.x].hasFlag = ! this.state.rows[cell.y][cell.x].hasFlag;
+    this.setState({rows : this.state.rows});
+    this.props.checkFlagNum(this.state.rows[cell.y][cell.x].hasFlag ? 1 : -1);
   }
 
   countMines(cell) {

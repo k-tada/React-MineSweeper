@@ -27,7 +27,7 @@ var _classCallCheck = require("babel-runtime/helpers/class-call-check")["default
 var _interopRequireDefault = require("babel-runtime/helpers/interop-require-default")["default"];
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _react = require('react');
@@ -35,93 +35,96 @@ var _react = require('react');
 var _react2 = _interopRequireDefault(_react);
 
 var Cell = (function (_React$Component) {
-    _inherits(Cell, _React$Component);
+  _inherits(Cell, _React$Component);
 
-    function Cell(props) {
-        _classCallCheck(this, Cell);
+  function Cell(props) {
+    _classCallCheck(this, Cell);
 
-        _get(Object.getPrototypeOf(Cell.prototype), "constructor", this).call(this, props);
-        this.state = {
-            hasMine: props.cell.hasMine,
-            hasFlag: props.cell.hasFlag,
-            isOpened: props.cell.isOpened,
-            count: 0
-        };
+    _get(Object.getPrototypeOf(Cell.prototype), "constructor", this).call(this, props);
+    this.state = {
+      hasMine: props.cell.hasMine,
+      hasFlag: props.cell.hasFlag,
+      isOpened: props.cell.isOpened,
+      count: 0
+    };
+  }
+
+  _createClass(Cell, [{
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps(nextProps) {
+      this.setState({
+        isOpened: nextProps.cell.isOpened,
+        hasMine: nextProps.cell.hasMine,
+        hasFlag: nextProps.cell.hasFlag,
+        count: nextProps.cell.count
+      });
     }
+  }, {
+    key: "open",
+    value: function open() {
+      this.props.open(this.props.cell);
+    }
+  }, {
+    key: "mark",
+    value: function mark(e) {
+      e.preventDefault();
+      if (!this.state.isOpened) {
+        this.props.mark(this.props.cell);
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var divCls = "Cell__cover";
 
-    _createClass(Cell, [{
-        key: "componentWillReceiveProps",
-        value: function componentWillReceiveProps(nextProps) {
-            this.setState({
-                isOpened: nextProps.cell.isOpened,
-                hasMine: nextProps.cell.hasMine,
-                hasFlag: nextProps.cell.hasFlag,
-                count: nextProps.cell.count
-            });
-        }
-    }, {
-        key: "open",
-        value: function open() {
-            this.props.open(this.props.cell);
-        }
-    }, {
-        key: "mark",
-        value: function mark(e) {
-            e.preventDefault();
-            if (!this.state.isOpened) {
-                this.props.mark(this.props.cell);
-            }
-        }
-    }, {
-        key: "render",
-        value: function render() {
-            var _this = this;
-            var cell = (function () {
-                if (_this.state.isOpened) {
-                    if (_this.state.hasMine) {
-                        return _react2["default"].createElement(
-                            "div",
-                            { className: "Cell__cover Cell__cover--opened" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "Cell__bomb" },
-                                "b"
-                            )
-                        );
-                    } else {
-                        return _react2["default"].createElement(
-                            "div",
-                            { className: "Cell__cover Cell__cover--opened" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "Cell__number" + _this.state.count },
-                                _this.state.count
-                            )
-                        );
-                    }
-                } else if (_this.state.hasFlag) {
-                    return _react2["default"].createElement(
-                        "div",
-                        { className: "Cell__cover Cell__cover--opened" },
-                        _react2["default"].createElement(
-                            "span",
-                            { className: "Cell__flag" },
-                            "f"
-                        )
-                    );
-                } else {
-                    return _react2["default"].createElement("div", { className: "Cell__cover" });
-                }
-            })();
-            return _react2["default"].createElement(
-                "td",
-                { className: "Cell", onClick: this.open.bind(this), onContextMenu: this.mark.bind(this) },
-                cell
-            );
-        }
-    }]);
+      if (this.state.isOpened) {
+        divCls += " Cell__cover--opened";
+      }
 
-    return Cell;
+      var spanCls = "";
+      var sts = '';
+
+      if (this.state.isOpened) {
+        if (this.state.hasMine) {
+          sts = "bomb";
+        } else {
+          sts = "open";
+        }
+      } else if (this.state.hasFlag) {
+        sts = "flag";
+      }
+
+      switch (sts) {
+        case "open":
+          spanCls = "Cell__number" + this.state.count;break;
+        case "bomb":
+          spanCls = "Cell__bomb";break;
+        case "flag":
+          spanCls = "Cell__flag";break;
+        default: // Do Nothing
+      }
+
+      return _react2["default"].createElement(
+        "td",
+        { className: "Cell", onClick: this.open.bind(this), onContextMenu: this.mark.bind(this) },
+        _react2["default"].createElement(
+          "div",
+          { className: divCls },
+          _react2["default"].createElement(
+            "span",
+            { className: spanCls },
+            sts == "open" ? this.state.count : // オープン
+            sts == "bomb" ? 'b' : // 爆弾
+            sts == "flag" ? 'f' : // フラグ
+            '' // それ以外
+
+          )
+        )
+      );
+    }
+  }]);
+
+  return Cell;
 })(_react2["default"].Component);
 
 exports["default"] = Cell;
@@ -344,7 +347,7 @@ var _classCallCheck = require('babel-runtime/helpers/class-call-check')['default
 var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
 
 Object.defineProperty(exports, '__esModule', {
-    value: true
+  value: true
 });
 
 var _react = require('react');
@@ -356,41 +359,36 @@ var _CellJs = require('./Cell.js');
 var _CellJs2 = _interopRequireDefault(_CellJs);
 
 var Row = (function (_React$Component) {
-    _inherits(Row, _React$Component);
+  _inherits(Row, _React$Component);
 
-    function Row(props) {
-        _classCallCheck(this, Row);
+  function Row(props) {
+    _classCallCheck(this, Row);
 
-        _get(Object.getPrototypeOf(Row.prototype), 'constructor', this).call(this, props);
-        this.state = {
-            cells: props.cells
-        };
+    _get(Object.getPrototypeOf(Row.prototype), 'constructor', this).call(this, props);
+  }
+
+  _createClass(Row, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      this.props = nextProps;
     }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this = this;
 
-    _createClass(Row, [{
-        key: 'componentWillReceiveProps',
-        value: function componentWillReceiveProps(nextProps) {
-            this.setState({
-                cells: nextProps.cells
-            });
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var _this = this;
+      var Cells = this.props.cells.map(function (cell, index) {
+        return _react2['default'].createElement(_CellJs2['default'], { cell: cell, open: _this.props.open, mark: _this.props.mark });
+      });
+      return _react2['default'].createElement(
+        'tr',
+        null,
+        Cells
+      );
+    }
+  }]);
 
-            var Cells = this.state.cells.map(function (cell, index) {
-                return _react2['default'].createElement(_CellJs2['default'], { cell: cell, open: _this.props.open, mark: _this.props.mark });
-            });
-            return _react2['default'].createElement(
-                'tr',
-                null,
-                Cells
-            );
-        }
-    }]);
-
-    return Row;
+  return Row;
 })(_react2['default'].Component);
 
 exports['default'] = Row;
@@ -533,34 +531,35 @@ var Table = (function (_React$Component) {
   }, {
     key: 'open',
     value: function open(cell) {
-      var num = this.countMines(cell);
-      var _rows = this.state.rows;
-      if (!_rows[cell.y][cell.x].isOpened) {
+      if (!this.state.rows[cell.y][cell.x].isOpened) {
         this.props.addOpenNum();
       }
 
-      _rows[cell.y][cell.x].isOpened = true;
-      _rows[cell.y][cell.x].count = cell.hasMine ? "b" : num;
-      this.setState({ rows: _rows });
-      if (_rows[cell.y][cell.x].hasFlag) {
-        _rows[cell.y][cell.x].hasFlag = false;
+      var num = this.countMines(cell);
+      this.state.rows[cell.y][cell.x].isOpened = true;
+      this.state.rows[cell.y][cell.x].count = num;
+      this.state.rows[cell.y][cell.x].hasFlag = false;
+
+      if (cell.hasMine) {
+        this.state.rows[cell.y][cell.x].count = "b";
+        this.props.gameOver();
+      }
+      this.setState({ rows: this.state.rows });
+
+      if (this.state.rows[cell.y][cell.x].hasFlag) {
         this.props.checkFlagNum(-1);
       }
+
       if (!cell.hasMine && num === 0) {
         this.openAround(cell);
-      }
-      if (cell.hasMine) {
-        this.props.gameOver();
       }
     }
   }, {
     key: 'mark',
     value: function mark(cell) {
-      var _rows = this.state.rows;
-      var _cell = _rows[cell.y][cell.x];
-      _cell.hasFlag = !_cell.hasFlag;
-      this.setState({ rows: _rows });
-      this.props.checkFlagNum(_cell.hasFlag ? 1 : -1);
+      this.state.rows[cell.y][cell.x].hasFlag = !this.state.rows[cell.y][cell.x].hasFlag;
+      this.setState({ rows: this.state.rows });
+      this.props.checkFlagNum(this.state.rows[cell.y][cell.x].hasFlag ? 1 : -1);
     }
   }, {
     key: 'countMines',
