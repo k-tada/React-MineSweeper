@@ -15,9 +15,7 @@ gulp.task('browserify', function() {
     entries: './js/app.js',
     extensions: ['.js']
     })
-    .transform(babelify.configure({
-      optional: ['runtime']
-    }))
+    .transform('babelify', { presets: ['es2015', 'react'], plugins: ["transform-runtime"] })
     .bundle()
     .on('error', function(err) { console.log(err.message); })
     .pipe(source('bundle.js'))
