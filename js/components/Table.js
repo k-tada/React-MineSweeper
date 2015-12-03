@@ -1,5 +1,6 @@
 import React from 'react';
 import Row from './Row.js';
+import update from 'react-addons-update';
 
 export default class Table extends React.Component {
 
@@ -8,6 +9,7 @@ export default class Table extends React.Component {
     this.state = {
       rows : this.createTable(props)
     };
+    this._state = {};
   }
 
   componentWillReceiveProps(nextProps) {
@@ -45,22 +47,30 @@ export default class Table extends React.Component {
   }
 
   open(cell) {
-    if( ! this.state.rows[cell.y][cell.x].isOpened){
-      this.props.addOpenNum();
+    this._state.rows = update(this.state.rows, {[cell.y]: {[cell.x]: {isOpened: {$set: false}}}});
+    this._open(cell);
+    this.setState({rows : this._state.rows});
+  }
+
+  _open(cell) {
+    var x = cell.x;
+    var y = cell.y;
+    if(this._state.rows[y][x].isOpened){
+      return;
     }
 
     var num = this.countMines(cell);
-    this.state.rows[cell.y][cell.x].isOpened = true;
-    this.state.rows[cell.y][cell.x].count    = num;
-    this.state.rows[cell.y][cell.x].hasFlag  = false;
+    this.props.addOpenNum();
+    this._state.rows[y][x].isOpened = true;
+    this._state.rows[y][x].count    = num;
+    this._state.rows[y][x].hasFlag  = false;
 
     if(cell.hasMine){
-      this.state.rows[cell.y][cell.x].count = "b";
+      this._state.rows[y][x].count = "b";
       this.props.gameOver();
     }
-    this.setState({rows : this.state.rows});
 
-    if(this.state.rows[cell.y][cell.x].hasFlag){
+    if(this._state.rows[y][x].hasFlag){
       this.props.checkFlagNum(-1);
     }
 
@@ -70,16 +80,17 @@ export default class Table extends React.Component {
   }
 
   mark(cell) {
-    this.state.rows[cell.y][cell.x].hasFlag = ! this.state.rows[cell.y][cell.x].hasFlag;
-    this.setState({rows : this.state.rows});
-    this.props.checkFlagNum(this.state.rows[cell.y][cell.x].hasFlag ? 1 : -1);
+    var isMarked = this.state.rows[cell.y][cell.x].hasFlag;
+    this._state.rows = update(this.state.rows, {[cell.y]: {[cell.x]: {hasFlag: {$set: ! isMarked}}}});
+    this.setState({rows : this._state.rows});
+    this.props.checkFlagNum(this._state.rows[cell.y][cell.x].hasFlag ? 1 : -1);
   }
 
   countMines(cell) {
     var aroundMinesNum = 0;
     this.doProcForArrount(cell, (r, c) => {
       // 爆弾
-      if( this.state.rows[r][c].hasMine ){
+      if( this._state.rows[r][c].hasMine ){
         aroundMinesNum ++;
       }
     });
@@ -88,13 +99,13 @@ export default class Table extends React.Component {
 
   // 自セルが空の場合は周囲のセルも開く
   openAround(cell){
-    var _rows = this.state.rows;
+    var _rows = this._state.rows;
     this.doProcForArrount(cell, (r, c) => {
       if(
-          ! this.state.rows[r][c].hasMine &&   // 爆弾以外
-          ! this.state.rows[r][c].isOpened     // 開いてないセル
+          ! this._state.rows[r][c].hasMine &&   // 爆弾以外
+          ! this._state.rows[r][c].isOpened     // 開いてないセル
       ){
-        this.open(_rows[r][c]);
+        this._open(_rows[r][c]);
       }
     });
   }
