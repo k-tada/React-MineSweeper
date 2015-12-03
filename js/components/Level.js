@@ -5,9 +5,9 @@ export default class Level extends React.Component {
     super(props);
   }
   render() {
-    var levels = this.props.levels.map((l) => {
+    var levels = this.props.levels.map((l, i) => {
       return (
-        <label><input type="radio" name="level" onChange={this.props.setLevel.bind(this, l)} checked={this.props.level === l} />{l}</label>
+        <label key={"level" + i}><input type="radio" name="level" onChange={this.props.setLevel.bind(this, l)} checked={this.props.level === l} />{l}</label>
       );
     });
     return (

@@ -8,9 +8,9 @@ export default class Row extends React.Component {
   }
 
   render(){
-    var Cells = this.props.cells.map((cell, index) => {
+    var Cells = this.props.cells.map((cell, i) => {
       return(
-        <Cell cell={cell} open={this.props.open} mark={this.props.mark} />
+        <Cell key={"cell" + i} cell={cell} open={this.props.open} mark={this.props.mark} />
       );
     });
     return (

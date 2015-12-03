@@ -30,6 +30,7 @@
     "immutable": "^3.7.5",
     "react": "~0.13.3",
     "react-addons-update": "^0.14.3",
+    "react-dom": "^0.14.3",
     "vinyl-source-stream": "~1.1.0",
     "watchify": "~3.6.1"
   },

@@ -130,9 +130,9 @@ export default class Table extends React.Component {
   }
 
   render() {
-    var Rows = this.state.rows.map((row, index) => {
+    var Rows = this.state.rows.map((row, i) => {
       return(
-        <Row cells={row} open={this.open.bind(this)} mark={this.mark.bind(this)} />
+        <Row key={"row" + i} cells={row} open={this.open.bind(this)} mark={this.mark.bind(this)} />
       );
     });
     return(

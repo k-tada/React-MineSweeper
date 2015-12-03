@@ -9,7 +9,7 @@ export default class StatusBar extends React.Component {
   }
   render() {
     return (
-      <div class="MineSweeper__StatusBar">
+      <div className="MineSweeper__StatusBar">
         <Flag num={this.props.flagNum} />
         <Face reset={this.props.reset.bind(this)} status={this.props.status} />
         <Time time={this.props.time} />
