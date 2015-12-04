@@ -1,65 +1,58 @@
 import React from 'react';
 
 export default class Cell extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            hasMine : props.cell.hasMine,
-            hasFlag : props.cell.hasFlag,
-            isOpened : props.cell.isOpened,
-            count : 0
-        };
+  constructor(props) {
+    super(props);
+  }
+  open() {
+    this.props.open(this.props.cell);
+  }
+  mark(e) {
+    e.preventDefault();
+    if(!this.props.cell.isOpened){
+      this.props.mark(this.props.cell);
     }
-    componentWillReceiveProps(nextProps) {
-        this.setState({
-            isOpened : nextProps.cell.isOpened,
-            hasMine : nextProps.cell.hasMine,
-            hasFlag : nextProps.cell.hasFlag,
-            count : nextProps.cell.count
-        });
+  }
+  render() {
+    var divCls = "Cell__cover";
+
+    if(this.props.cell.isOpened){
+      divCls += " Cell__cover--opened";
     }
-    open() {
-        this.props.open(this.props.cell);
+
+    var spanCls = "";
+    var sts = '';
+
+    if(this.props.cell.isOpened) {
+      if(this.props.cell.hasMine) {
+        sts = "bomb";
+      } else {
+        sts = "open";
+      }
+    } else if(this.props.cell.hasFlag) {
+      sts = "flag";
     }
-    mark(e) {
-        e.preventDefault();
-        if(!this.state.isOpened){
-            this.props.mark(this.props.cell);
+
+    switch (sts) {
+      case "open" : spanCls = "Cell__number" + this.props.cell.count; break;
+      case "bomb" : spanCls = "Cell__bomb"; break;
+      case "flag" : spanCls = "Cell__flag"; break;
+      default : // Do Nothing
+    }
+
+    return (
+      <td className="Cell" onClick={this.open.bind(this)} onContextMenu={this.mark.bind(this)}>
+        <div className={divCls}>
+        <span className={spanCls}>
+        {
+          sts == "open" ? this.props.cell.count : // オープン
+          sts == "bomb" ? 'b' :              // 爆弾
+          sts == "flag" ? 'f' :              // フラグ
+          ''                                 // それ以外
         }
-    }
-    render() {
-        var _this = this;
-        var cell = () => {
-            if(_this.state.isOpened){
-                if(_this.state.hasMine){
-                    return (
-                        <div className="Cell__cover Cell__cover--opened">
-                            <span className="Cell__bomb">b</span>
-                        </div>            
-                    );
-                } else {
-                    return (
-                        <div className="Cell__cover Cell__cover--opened">
-                            <span className={"Cell__number"+_this.state.count}>{_this.state.count}</span>
-                        </div>            
-                    );
-                }
-            } else if(_this.state.hasFlag){
-                return (
-                    <div className="Cell__cover Cell__cover--opened">
-                        <span className="Cell__flag">f</span>
-                    </div>            
-                );
-            } else {
-                return (
-                    <div className="Cell__cover"></div>            
-                );
-            }
-        }();
-        return (
-            <td className="Cell" onClick={this.open.bind(this)} onContextMenu={this.mark.bind(this)}>
-                {cell}
-            </td>
-        );
-    }
+        </span>
+        </div>
+      </td>
+    );
+  }
 }
